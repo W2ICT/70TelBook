@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f2a4a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="สมุดโทรศัพท์">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzBmMmE0YSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIxNTAiIHk9IjExMCIgd2lkdGg9IjIxMiIgaGVpZ2h0PSIyOTIiIHJ4PSIyOCIvPjxwYXRoIGQ9Ik0xNTAgMTcwaC0yME0xNTAgMjU2aC0yME0xNTAgMzQyaC0yMCIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjIxNSIgcj0iMzQiLz48cGF0aCBkPSJNMjAwIDMzMGM4LTQwIDMyLTUyIDU2LTUyczQ4IDEyIDU2IDUyIi8+PC9nPjwvc3ZnPg==" type="image/svg+xml">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzBmMmE0YSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIxNTAiIHk9IjExMCIgd2lkdGg9IjIxMiIgaGVpZ2h0PSIyOTIiIHJ4PSIyOCIvPjxwYXRoIGQ9Ik0xNTAgMTcwaC0yME0xNTAgMjU2aC0yME0xNTAgMzQyaC0yMCIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjIxNSIgcj0iMzQiLz48cGF0aCBkPSJNMjAwIDMzMGM4LTQwIDMyLTUyIDU2LTUyczQ4IDEyIDU2IDUyIi8+PC9nPjwvc3ZnPg==">
+<title>สมุดโทรศัพท์ ผบช.กองบิน</title>
+<style>
+:root{
+  --bg:#f2f4f8;--card:#fff;--text:#17202e;--muted:#6b7686;--line:#e3e7ee;
+  --primary:#0f2a4a;--accent:#1d6fe0;--call:#12a150;--danger:#d93a3a;--star:#f5a623;
+  --chip:#e6ecf5;--shadow:0 2px 12px rgba(15,42,74,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c121b;--card:#161f2c;--text:#e8edf4;--muted:#93a0b3;--line:#243044;
+    --primary:#0a1930;--accent:#5b9bff;--call:#2ec27e;--danger:#ff6b6b;--chip:#222f43;--shadow:0 2px 12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c121b;--card:#161f2c;--text:#e8edf4;--muted:#93a0b3;--line:#243044;
+  --primary:#0a1930;--accent:#5b9bff;--call:#2ec27e;--danger:#ff6b6b;--chip:#222f43;--shadow:0 2px 12px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Sarabun","Noto Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px}
+body{max-width:640px;margin:0 auto;min-height:100vh;padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+button{font:inherit;color:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:20;background:var(--primary);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px}
+.title{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.title h1{font-size:15px;white-space:nowrap;margin:0;font-weight:700}
+.title small{opacity:.75;font-size:13px}
+.iconbtn{background:rgba(255,255,255,.14);border:0;border-radius:10px;width:38px;height:38px;color:#fff;font-size:18px}
+.search{position:relative}
+.search input{width:100%;border:0;border-radius:12px;padding:11px 40px 11px 40px;font:inherit;background:#fff;color:#17202e;outline:none}
+.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.5}
+.search .x{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;color:#6b7686;font-size:18px;width:32px;height:32px;display:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:0;border-radius:999px;padding:6px 13px;background:rgba(255,255,255,.14);color:#fff;font-size:14px}
+.chip.on{background:#fff;color:var(--primary);font-weight:700}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 4px;color:var(--muted);font-size:13px}
+.bar select{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:4px 6px;font:inherit;font-size:13px}
+.gh{position:sticky;top:var(--hh,118px);z-index:5;background:var(--bg);padding:8px 16px 4px;font-weight:700;font-size:14px;color:var(--accent);display:flex;justify-content:space-between}
+.gh span{color:var(--muted);font-weight:400}
+.item{display:flex;align-items:center;gap:12px;background:var(--card);margin:6px 12px;padding:10px 10px 10px 12px;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.06);cursor:pointer}
+.item:active{background:var(--chip)}
+.av{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px}
+.info{flex:1;min-width:0}
+.nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nm em{font-style:normal;color:var(--muted);font-weight:400}
+.ps{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl{font-size:13px;color:var(--accent)}
+.star{color:var(--star)}
+.vac{opacity:.6}
+.callbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--call);color:#fff;font-size:19px;text-decoration:none;display:grid;place-items:center}
+.callbtn.off{background:var(--chip);color:var(--muted);pointer-events:none}
+mark{background:#ffe58a;color:inherit;border-radius:3px}
+.empty{text-align:center;color:var(--muted);padding:60px 20px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:30}
+nav button{flex:1;min-width:0;border:0;background:none;padding:9px 0 8px;font-size:11px;white-space:nowrap;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button b{font-size:20px;font-weight:400}
+nav button.on{color:var(--accent);font-weight:700}
+.fab{position:fixed;right:max(16px,calc(50% - 304px));bottom:calc(76px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;border:0;background:var(--accent);color:#fff;font-size:30px;box-shadow:var(--shadow);z-index:25}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.sheet-bg.show{display:flex}
+.sheet{background:var(--card);width:100%;max-width:640px;border-radius:20px 20px 0 0;max-height:92vh;overflow:auto;padding:18px 18px calc(18px + env(safe-area-inset-bottom));animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.sheet .head{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.sheet .av{width:60px;height:60px;font-size:20px}
+.sheet h2{margin:0;font-size:19px}
+.sheet .sub{color:var(--muted);font-size:14px}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.acts a,.acts button{border:0;background:var(--chip);border-radius:12px;padding:10px 4px;text-align:center;text-decoration:none;color:var(--text);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.acts b{font-size:20px;font-weight:400}
+.acts .main{background:var(--call);color:#fff}
+.acts .dis{opacity:.4;pointer-events:none}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.rows span{color:var(--muted);flex:none}
+.rows strong{text-align:right;font-weight:500}
+.tel a{display:inline-block;color:var(--accent);text-decoration:none;font-weight:600}
+form label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+form input,form select{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:10px;padding:10px 12px;font:inherit}
+form .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btnrow{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;border:0;border-radius:12px;padding:12px;background:var(--chip);font-weight:600}
+.btn.pri{background:var(--accent);color:#fff}
+.btn.dan{background:var(--danger);color:#fff}
+.set h3{margin:18px 16px 6px;font-size:14px;color:var(--muted)}
+.set .box{background:var(--card);margin:0 12px;border-radius:14px;overflow:hidden}
+.set .box button,.set .box label.row{display:flex;width:100%;align-items:center;justify-content:space-between;padding:14px 16px;border:0;border-top:1px solid var(--line);background:none;text-align:left;font-size:15px}
+.set .box > :first-child{border-top:0}
+.set .box small{color:var(--muted)}
+#gate{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:24px;background:linear-gradient(160deg,#0f2a4a,#1d4f8f);overflow:auto}
+#gate.show{display:flex}
+.gcard{width:100%;max-width:380px;background:var(--card);color:var(--text);border-radius:22px;padding:28px 22px 22px;box-shadow:0 12px 40px rgba(0,0,0,.35);text-align:center}
+.gcard .logo{font-size:44px;line-height:1}
+.gcard h1{font-size:19px;margin:10px 0 2px}
+.gcard p{margin:0 0 16px;color:var(--muted);font-size:14px}
+.gin{position:relative}
+.gin input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:12px;padding:13px 46px 13px 14px;font:inherit;font-size:18px;letter-spacing:3px;text-align:center;outline:none}
+.gin input:focus{border-color:var(--accent)}
+.gin button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:18px;width:36px;height:36px}
+.grem{display:flex;gap:8px;align-items:center;justify-content:center;margin:12px 0 4px;font-size:14px;color:var(--muted)}
+#gerr{color:var(--danger);font-size:14px;min-height:22px;margin-top:6px}
+.gbtn{width:100%;border:0;border-radius:12px;padding:13px;background:var(--accent);color:#fff;font-weight:700;font-size:16px;margin-top:6px}
+.gbtn:disabled{opacity:.6}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#222;color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;z-index:99;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw}
+.toast.show{opacity:1}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<header id="hd">
+  <div class="title">
+    <div><h1>📞 สมุดโทรศัพท์ ผบช.กองบิน</h1><small id="sub"></small></div>
+    <div style="display:flex;gap:8px"><button class="iconbtn" id="adminBtn" title="เข้าสู่ระบบ Admin">🔒</button><button class="iconbtn" id="shareBtn" title="แชร์สมุดโทรศัพท์">📤</button><button class="iconbtn" id="themeBtn" title="สลับโหมดมืด/สว่าง">🌓</button></div>
+  </div>
+  <div class="search">
+    <span class="ic">🔍</span>
+    <input id="q" type="search" placeholder="ค้นหา ชื่อ / ชื่อเล่น / ตำแหน่ง / เบอร์ / รุ่น" autocomplete="off" enterkeyhint="search">
+    <button class="x" id="qx" aria-label="ล้าง">✕</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<main id="view"></main>
+
+<button class="fab" id="fab" aria-label="เพิ่มรายชื่อ">＋</button>
+
+<nav>
+  <button data-tab="all" class="on"><b>👥</b>ทั้งหมด</button>
+  <button data-tab="std"><b>🛩️</b>มาตรฐานฯ</button>
+  <button data-tab="sep"><b>🚁</b>นบ.ฮ.หน่วยแยก</button>
+  <button data-tab="fav"><b>⭐</b>โปรด</button>
+  <button data-tab="set"><b>⚙️</b>ตั้งค่า</button>
+</nav>
+
+<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"></div></div>
+<div id="gate"><div class="gcard">
+  <div class="logo">📞</div>
+  <h1>สมุดโทรศัพท์ ผบช.กองบิน</h1>
+  <p>สำหรับผู้ได้รับอนุญาตเท่านั้น กรุณาใส่รหัสเข้าใช้งาน</p>
+  <form id="gateForm" autocomplete="off">
+    <div class="gin"><input id="gcode" type="password" placeholder="รหัสเข้าใช้งาน" autocomplete="off" autocapitalize="characters" spellcheck="false"><button type="button" id="geye" aria-label="แสดง/ซ่อนรหัส">👁</button></div>
+    <label class="grem"><input id="grem" type="checkbox" checked> จำฉันไว้ในเครื่องนี้</label>
+    <div id="gerr"></div>
+    <button class="gbtn" id="gbtn" type="submit">เข้าสู่ระบบ</button>
+  </form>
+</div></div>
+<div class="toast" id="toast"></div>
+<input type="file" id="file" accept=".csv,.json,text/csv,application/json" class="hide">
+
+<script>
+const CLOUD = false;
+const SRC_HTML = "<!doctype html>\n" + document.documentElement.outerHTML;
+const ORIGINAL = [{"id":"o0","rank":"น.อ.(พ)","name":"ภาสกร ไชยกำเนิด","pos":"ผบ.บน.1","unit":"บน.1","cls":"35","nick":"ยักษ์","tel":"088-580-8501","fav":false,"order":0},{"id":"o1","rank":"น.อ.","name":"เบญจพล เขียวชอุ่ม","pos":"รอง ผบ.บน.1(1)","unit":"บน.1","cls":"43","nick":"เบญ","tel":"089-923-7156","fav":false,"order":1},{"id":"o2","rank":"น.อ.","name":"อริญชย์ แก้วทรง","pos":"รอง ผบ.บน.1(2)","unit":"บน.1","cls":"44","nick":"โอม","tel":"093-151-6354","fav":false,"order":2},{"id":"o3","rank":"น.อ.","name":"ภัทรนันท์ โสมะนทน์","pos":"เสธ.บน.1","unit":"บน.1","cls":"45","nick":"เกม","tel":"088-164-4685","fav":false,"order":3},{"id":"o4","rank":"น.ท.","name":"สมคะเน มีสอาด","pos":"ผู้บังคับฝูงบิน 103 บน.1","unit":"บน.1","cls":"47","nick":"โน้ต","tel":"086-870-4835","fav":false,"order":4},{"id":"o5","rank":"น.ท.","name":"รุ่งยศ ยศไกร","pos":"หัวหน้าแผนกยุทธการ บก.บน.1","unit":"บน.1","cls":"49","nick":"หรั่ง","tel":"080-554-8574","fav":false,"order":5},{"id":"o6","rank":"น.ต.","name":"สุริยพงษ์ ขาวสําลี","pos":"นภบ.บน.1","unit":"บน.1","cls":"52","nick":"อาร์ม","tel":"096-665-5259","fav":false,"order":6},{"id":"o7","rank":"น.ต.","name":"พรวิษณุ รุ่มรวย","pos":"นายทหารมาตรฐานการบิน บน.1","unit":"บน.1","cls":"51","nick":"บ๊อบ","tel":"080-579-4303","fav":false,"order":7},{"id":"o8","rank":"น.อ.(พ)","name":"อานนท์ สิริปริญญา","pos":"ผบ.บน.2","unit":"บน.2","cls":"36","nick":"กอล์ฟ","tel":"064-656-3519","fav":false,"order":8},{"id":"o9","rank":"น.อ.","name":"กริษณะ วัลลิภากร","pos":"รอง ผบ.บน.2(1)","unit":"บน.2","cls":"38","nick":"โอ้","tel":"081-353-4676","fav":false,"order":9},{"id":"o10","rank":"น.อ.","name":"กานต์ คงสุวรรณ","pos":"รอง ผบ.บน.2(2)","unit":"บน.2","cls":"42","nick":"กานต์","tel":"090-539-4249","fav":false,"order":10},{"id":"o11","rank":"น.อ.","name":"ธนภัทร สุนทรนนท์","pos":"เสธ.บน.2","unit":"บน.2","cls":"43","nick":"แบ็ค","tel":"086-535-9016","fav":false,"order":11},{"id":"o12","rank":"น.อ.","name":"สรณัฐ สังข์แก้ว","pos":"ผู้บังคับฝูงบิน 201 บน.2","unit":"บน.2","cls":"44","nick":"จอม","tel":"089-688-0525","fav":false,"order":12},{"id":"o13","rank":"น.ท.","name":"ธนเดช สุขยืน","pos":"ผู้บังคับฝูงบิน 202 บน.2","unit":"บน.2","cls":"48","nick":"บีม","tel":"095-939-5755","fav":false,"order":13},{"id":"o14","rank":"น.ท.","name":"ฐปกรณ์ เสือทรงศีล","pos":"ผู้บังคับฝูงบิน 203 บน.2","unit":"บน.2","cls":"48","nick":"เสือ","tel":"084-822-2698","fav":false,"order":14},{"id":"o15","rank":"น.ท.","name":"ยุทธภมิ เผยกลาง","pos":"หัวหน้าแผนกยุทธการ บก.บน.2","unit":"บน.2","cls":"46","nick":"เดียร์ / แง่ม","tel":"092-614-2539","fav":false,"order":15},{"id":"o16","rank":"น.ท.","name":"วิศวชิต อินทสุวรรณ์","pos":"นภบ.บน.2","unit":"บน.2","cls":"49","nick":"ปั้ม","tel":"090-926-3709","fav":false,"order":16},{"id":"o17","rank":"น.ท.","name":"เจตนิพัทธ์ เจนคิด","pos":"นายทหารมาตรฐานการบิน บน.2","unit":"บน.2","cls":"49","nick":"เจมส์/จิ๋ว","tel":"096-287-2299","fav":false,"order":17},{"id":"o18","rank":"น.ต.","name":"วชิระ อาษานอก","pos":"นายทหารมาตรฐานการบิน บน.2","unit":"บน.2","cls":"52","nick":"โอ๊ด","tel":"087-942-5745","fav":false,"order":18},{"id":"o19","rank":"น.อ.(พ)","name":"ทรงศักดิ์ ธรรมสาร","pos":"ผบ.บน.3","unit":"บน.3","cls":"35","nick":"","tel":"","fav":false,"order":19},{"id":"o20","rank":"","name":"","pos":"รอง ผบ.บน.3(1)","unit":"บน.3","cls":"","nick":"","tel":"","fav":false,"order":20},{"id":"o21","rank":"น.อ.","name":"สิโรตม์ บัวแก้ว","pos":"รอง ผบ.บน.3(2)","unit":"บน.3","cls":"43","nick":"","tel":"","fav":false,"order":21},{"id":"o22","rank":"น.อ.","name":"ณัฐพงษ์ ศรีหานาม","pos":"เสธ.บน.3","unit":"บน.3","cls":"44","nick":"","tel":"","fav":false,"order":22},{"id":"o23","rank":"น.ท.","name":"มาสมงคล สุวรรณขำ","pos":"ผู้บังคับฝูงบิน 301 บน.3","unit":"บน.3","cls":"47","nick":"","tel":"","fav":false,"order":23},{"id":"o24","rank":"น.ท.","name":"นครินทร์ สมบูรณ์","pos":"ผู้บังคับฝูงบิน 302 บน.3","unit":"บน.3","cls":"48","nick":"","tel":"","fav":false,"order":24},{"id":"o25","rank":"น.ท.","name":"วิทวัส แขมคำ","pos":"หัวหน้าแผนกยุทธการ บก.บน.3","unit":"บน.3","cls":"48","nick":"","tel":"","fav":false,"order":25},{"id":"o26","rank":"น.ต.","name":"ภูริต พันธุวงษ์","pos":"นภบ.บน.3","unit":"บน.3","cls":"51","nick":"รอน","tel":"","fav":false,"order":26},{"id":"o27","rank":"น.ต.","name":"เจษฎากร วัดสง่า","pos":"นายทหารมาตรฐานการบิน บน.3","unit":"บน.3","cls":"51","nick":"เจษ","tel":"","fav":false,"order":27},{"id":"o28","rank":"น.ต.","name":"วชิราวรรณ เขียวแก้ว","pos":"นายทหารมาตรฐานการบิน บน.3","unit":"บน.3","cls":"","nick":"ชิ","tel":"","fav":false,"order":28},{"id":"o29","rank":"น.อ.","name":"นิพิท วิชัยดิษฐ","pos":"ผบ.บน.4","unit":"บน.4","cls":"38","nick":"อู๊ด","tel":"","fav":false,"order":29},{"id":"o30","rank":"น.อ.","name":"อาณัติ สิงห์เมืองพล","pos":"รอง ผบ.บน.4(1)","unit":"บน.4","cls":"42","nick":"โป","tel":"","fav":false,"order":30},{"id":"o31","rank":"น.อ.","name":"ณัฐพล ม่วงเรือง","pos":"รอง ผบ.บน.4(2)","unit":"บน.4","cls":"43","nick":"เด็ก","tel":"","fav":false,"order":31},{"id":"o32","rank":"น.อ.","name":"ดลดิเรก ทองโสภา","pos":"เสธ.บน.4","unit":"บน.4","cls":"44","nick":"","tel":"","fav":false,"order":32},{"id":"o33","rank":"น.ท.","name":"นภเอกภัค แพรดำ","pos":"ผู้บังคับฝูงบิน 401 บน.4","unit":"บน.4","cls":"46","nick":"","tel":"","fav":false,"order":33},{"id":"o34","rank":"น.ท.","name":"นิติพัทธ์ เรืองสิทธิ์","pos":"ผู้บังคับฝูงบิน 402 บน.4","unit":"บน.4","cls":"47","nick":"โจ๋/ปิ๊ก","tel":"097-324-1904","fav":false,"order":34},{"id":"o35","rank":"น.ท.","name":"ศรัณย์ เศวตศิลา","pos":"ผู้บังคับฝูงบิน 403 บน.4","unit":"บน.4","cls":"46","nick":"","tel":"","fav":false,"order":35},{"id":"o36","rank":"น.ท.","name":"พิชญ์ ชูกิจคุณ","pos":"หัวหน้าแผนกยุทธการ บก.บน.4","unit":"บน.4","cls":"48","nick":"หมู/หมูอ้วน","tel":"","fav":false,"order":36},{"id":"o37","rank":"น.ท.","name":"สุกฤษฏิ์ กาญจนานนท์กุล","pos":"นภบ.บน.4","unit":"บน.4","cls":"49","nick":"สุกี้","tel":"089-439-8261","fav":false,"order":37},{"id":"o38","rank":"น.ต.","name":"พิพัฒน์ ติรจรัสวุฒิ","pos":"นายทหารมาตรฐานการบิน บน.4","unit":"บน.4","cls":"49","nick":"พีท","tel":"","fav":false,"order":38},{"id":"o39","rank":"น.ต.","name":"วาทิศ ทวิชศรี","pos":"นายทหารมาตรฐานการบิน บน.4","unit":"บน.4","cls":"51","nick":"แทน","tel":"","fav":false,"order":39},{"id":"o40","rank":"น.ต.","name":"จิรัฏฐ์ สายสุวรรณ","pos":"นายทหารมาตรฐานการบิน บน.4","unit":"บน.4","cls":"52","nick":"อะตอม","tel":"","fav":false,"order":40},{"id":"o41","rank":"น.อ.","name":"รัตนศักดิ์ โพธิ์แก้ว","pos":"ผบ.บน.5","unit":"บน.5","cls":"33","nick":"อู๋","tel":"082-419-9197","fav":false,"order":41},{"id":"o42","rank":"น.อ.","name":"ชิดพล อุไรพงษ์","pos":"รอง ผบ.บน.5(1)","unit":"บน.5","cls":"42","nick":"ก็อต","tel":"081-981-9699","fav":false,"order":42},{"id":"o43","rank":"น.อ.","name":"สุทธิวัฒน์ บุญชู","pos":"รอง ผบ.บน.5(2)","unit":"บน.5","cls":"43","nick":"ปอย","tel":"086-576-5377","fav":false,"order":43},{"id":"o44","rank":"น.ท.","name":"ปัญญา โภควณิช","pos":"เสธ.บน.5","unit":"บน.5","cls":"44","nick":"แมน","tel":"062-795-9535","fav":false,"order":44},{"id":"o45","rank":"น.ท.","name":"พัชรวัชร ทองผดุงโรจน์","pos":"ผู้บังคับฝูงบิน 501 บน.5","unit":"บน.5","cls":"47","nick":"เพชร","tel":"095-327-9914","fav":false,"order":45},{"id":"o46","rank":"น.ท.","name":"สวโรจน์ ไชยสิริศุภสิน","pos":"หัวหน้าแผนกยุทธการ บก.บน.5","unit":"บน.5","cls":"49","nick":"ซอย","tel":"096-962-0666","fav":false,"order":46},{"id":"o47","rank":"น.ต.","name":"อิทธิพล ทวีศรี","pos":"นายทหารมาตรฐานการบิน บน.5","unit":"บน.5","cls":"51","nick":"เกมส์","tel":"083-034-9336","fav":false,"order":47},{"id":"o48","rank":"น.อ.(พ)","name":"ฉัตรฤกษ์ ป้องกันภัย","pos":"ผบ.บน.6","unit":"บน.6","cls":"35","nick":"ฉัตร","tel":"","fav":false,"order":48},{"id":"o49","rank":"น.อ.","name":"ณัฐชัย เสือนาค","pos":"รอง ผบ.บน.6(1)","unit":"บน.6","cls":"44","nick":"ตาร์ท","tel":"083-187-6683","fav":false,"order":49},{"id":"o50","rank":"น.อ.","name":"ศักย์สรณ์ ไฝขาว","pos":"รอง ผบ.บน.6(2)","unit":"บน.6","cls":"43","nick":"อู","tel":"094-945-3945","fav":false,"order":50},{"id":"o51","rank":"น.อ.","name":"สุทธิรักษ์ ตรีโภคา","pos":"เสธ.บน.6","unit":"บน.6","cls":"45","nick":"จ่อย","tel":"080-156-4695","fav":false,"order":51},{"id":"o52","rank":"น.ท.","name":"ณัฐพล นิสยันต์","pos":"ผู้บังคับฝูงบิน 601 บน.6","unit":"บน.6","cls":"47","nick":"ต้อม","tel":"081-929-2479","fav":false,"order":52},{"id":"o53","rank":"น.อ.","name":"พงศ์พรเทพ ไสยจิตร","pos":"ผู้บังคับฝูงบิน 602 บน.6","unit":"บน.6","cls":"46","nick":"เอ้","tel":"098-248-2462","fav":false,"order":53},{"id":"o54","rank":"น.ท.","name":"ปรัฒสดางค์ แสงทอง","pos":"ผู้บังคับฝูงบิน 603 บน.6","unit":"บน.6","cls":"48","nick":"","tel":"","fav":false,"order":54},{"id":"o55","rank":"น.ท.","name":"สุรนัย ไชยพันธุ์","pos":"ผู้บังคับฝูงบิน 604 บน.6","unit":"บน.6","cls":"47","nick":"โจ้","tel":"082-449-9693","fav":false,"order":55},{"id":"o56","rank":"น.ท.","name":"ภัทร ทับเจริญ","pos":"หัวหน้าแผนกยุทธการ บก.บน.6","unit":"บน.6","cls":"48","nick":"ภัทร","tel":"064-213-2345","fav":false,"order":56},{"id":"o57","rank":"น.ท.","name":"พิทรัตน์ ธนากิจ","pos":"นภบ.บน.6","unit":"บน.6","cls":"49","nick":"เชฟ","tel":"086-881-2062","fav":false,"order":57},{"id":"o58","rank":"น.ต.","name":"ธนะภัทร์ ลอยทวินันท์","pos":"นายทหารมาตรฐานการบิน บน.6","unit":"บน.6","cls":"50","nick":"โอม","tel":"","fav":false,"order":58},{"id":"o59","rank":"น.ต.","name":"ธนากร นิธิภัทรวุฒิ","pos":"นายทหารมาตรฐานการบิน บน.6","unit":"บน.6","cls":"51","nick":"ชิคกี้","tel":"","fav":false,"order":59},{"id":"o60","rank":"น.ต.","name":"ปฏิภาณ นวลสุวรรณ์","pos":"นายทหารมาตรฐานการบิน บน.6","unit":"บน.6","cls":"52","nick":"ไก่อู","tel":"","fav":false,"order":60},{"id":"o61","rank":"น.อ.","name":"พศิน สมบัติทวี","pos":"ผบ.บน.7","unit":"บน.7","cls":"37","nick":"น้ำพุ","tel":"093-515-3519","fav":false,"order":61},{"id":"o62","rank":"น.อ.","name":"เฉลิมชัย ชำนาญยนต์","pos":"รอง ผบ.บน.7(1)","unit":"บน.7","cls":"41","nick":"แบน","tel":"","fav":false,"order":62},{"id":"o63","rank":"น.อ.","name":"ชัยพร จรรยา","pos":"รอง ผบ.บน.7(2)","unit":"บน.7","cls":"44","nick":"เต้(CJ)","tel":"080-801-7401","fav":false,"order":63},{"id":"o64","rank":"น.อ.","name":"สุกฤษฏิ์ นิสยันต์","pos":"เสธ.บน.7","unit":"บน.7","cls":"46","nick":"ต้น(ร็อค)","tel":"","fav":false,"order":64},{"id":"o65","rank":"น.ท.","name":"อภิชาติ หงษ์วิวัฒน์","pos":"ผู้บังคับฝูงบิน 701 บน.7","unit":"บน.7","cls":"47","nick":"","tel":"","fav":false,"order":65},{"id":"o66","rank":"น.ท.","name":"ยุทธา จงจริงวงศ์","pos":"ผู้บังคับฝูงบิน 702 บน.7","unit":"บน.7","cls":"47","nick":"","tel":"","fav":false,"order":66},{"id":"o67","rank":"น.ท.","name":"ศิษฏวุฒิ สุรัตพิพิธ","pos":"นภบ.บน.7","unit":"บน.7","cls":"49","nick":"","tel":"","fav":false,"order":67},{"id":"o68","rank":"น.ต.","name":"ปรัชญา นิรามัยธาดา","pos":"นายทหารมาตรฐานการบิน บน.7","unit":"บน.7","cls":"51","nick":"เฟิร์ส","tel":"","fav":false,"order":68},{"id":"o69","rank":"น.อ.","name":"บุญรัตน์ ฤทธิประภาส","pos":"ผบ.บน.21","unit":"บน.21","cls":"37","nick":"","tel":"","fav":false,"order":69},{"id":"o70","rank":"น.อ.","name":"ธีรวัฒน์ วรรณภาส","pos":"รอง ผบ.บน.21","unit":"บน.21","cls":"42","nick":"","tel":"","fav":false,"order":70},{"id":"o71","rank":"","name":"","pos":"","unit":"บน.21","cls":"","nick":"","tel":"","fav":false,"order":71},{"id":"o72","rank":"น.ท.","name":"สถาปน์ ไชยวัฒนพันธุ์","pos":"เสธ.บน.21","unit":"บน.21","cls":"45","nick":"","tel":"","fav":false,"order":72},{"id":"o73","rank":"น.ท.","name":"คณิตศักดิ์ ทรัพย์เจริญ","pos":"ผู้บังคับฝูงบิน 211 บน.21","unit":"บน.21","cls":"47","nick":"","tel":"","fav":false,"order":73},{"id":"o74","rank":"น.ท.","name":"คณิตศักดิ์ ทรัพย์เจริญ","pos":"หัวหน้าแผนกยุทธการ บก.บน.21","unit":"บน.21","cls":"47","nick":"","tel":"","fav":false,"order":74},{"id":"o75","rank":"น.ต.","name":"จิรวัฒน์ วลีธรชีพสวัสดิ์","pos":"นภบ.บน.21","unit":"บน.21","cls":"53","nick":"","tel":"","fav":false,"order":75},{"id":"o76","rank":"น.ต.","name":"อิสเรศ ยะกะกุล","pos":"นายทหารมาตรฐานการบิน บน.21","unit":"บน.21","cls":"51","nick":"โอม","tel":"","fav":false,"order":76},{"id":"o77","rank":"น.อ.","name":"กิตติ ธนบวรยศ","pos":"ผบ.บน.23","unit":"บน.23","cls":"36","nick":"","tel":"","fav":false,"order":77},{"id":"o78","rank":"น.อ.","name":"ฉลาด สารทอง","pos":"รอง ผบ.บน.23(1)","unit":"บน.23","cls":"43","nick":"","tel":"","fav":false,"order":78},{"id":"o79","rank":"","name":"","pos":"รอง ผบ.บน.23(2)","unit":"บน.23","cls":"","nick":"","tel":"","fav":false,"order":79},{"id":"o80","rank":"น.อ.","name":"ธันว์ พฤกษากิจ","pos":"เสธ.บน.23","unit":"บน.23","cls":"45","nick":"","tel":"","fav":false,"order":80},{"id":"o81","rank":"น.ท.","name":"นภวัต แก้วประจุ","pos":"ผู้บังคับฝูงบิน 231 บน.23","unit":"บน.23","cls":"47","nick":"","tel":"","fav":false,"order":81},{"id":"o82","rank":"น.ท.","name":"ภาณุพงศ์ ผ่องใจ","pos":"หัวหน้าแผนกยุทธการ บก.บน.23","unit":"บน.23","cls":"49","nick":"ต๋อง","tel":"","fav":false,"order":82},{"id":"o83","rank":"ร.อ.","name":"วิศรุต ไชยพันธ์","pos":"นภบ.บน.23","unit":"บน.23","cls":"54","nick":"","tel":"","fav":false,"order":83},{"id":"o84","rank":"น.ต.","name":"ธีรวุฒิ ไพรวัลย์","pos":"นายทหารมาตรฐานการบิน บน.23","unit":"บน.23","cls":"50","nick":"โจ","tel":"","fav":false,"order":84},{"id":"o85","rank":"น.อ.","name":"ธีระยุทธ เกื้อสกุล","pos":"ผบ.บน.41","unit":"บน.41","cls":"36","nick":"","tel":"","fav":false,"order":85},{"id":"o86","rank":"น.อ.","name":"ชัยวัฒน์ เสมียนรัมย์","pos":"รอง ผบ.บน.41(1)","unit":"บน.41","cls":"43","nick":"","tel":"","fav":false,"order":86},{"id":"o87","rank":"","name":"","pos":"รอง ผบ.บน.41(2)","unit":"บน.41","cls":"","nick":"","tel":"","fav":false,"order":87},{"id":"o88","rank":"น.อ.","name":"นราพัฒน์ ช่อสอึก","pos":"เสธ.บน.41","unit":"บน.41","cls":"45","nick":"","tel":"","fav":false,"order":88},{"id":"o89","rank":"น.ท.","name":"กิตติพันธ์ นรสิงห์","pos":"ผู้บังคับฝูงบิน 411 บน.41","unit":"บน.41","cls":"47","nick":"แบล็ค","tel":"091-721-0504","fav":false,"order":89},{"id":"o90","rank":"ร.อ.","name":"ธนพล ศุภผล","pos":"นภบ.บน.41","unit":"บน.41","cls":"54","nick":"เฟิร์ม","tel":"093-583-4878","fav":false,"order":90},{"id":"o91","rank":"น.ต.","name":"ภุชงค์ ชัยภูมิ","pos":"นายทหารมาตรฐานการบิน บน.41","unit":"บน.41","cls":"50","nick":"ปอ","tel":"","fav":false,"order":91},{"id":"o92","rank":"น.อ.","name":"พนม ดอนตุ้มไพร","pos":"ผบ.บน.46","unit":"บน.46","cls":"33","nick":"หนิง","tel":"089-269-4439","fav":false,"order":92},{"id":"o93","rank":"น.อ.","name":"เขมชาติ ทองมา","pos":"รอง ผบ.บน.46(1)","unit":"บน.46","cls":"42","nick":"เต้","tel":"091-047-7320","fav":false,"order":93},{"id":"o94","rank":"น.อ.","name":"ธีรพงษ์ เจริญยิ่ง","pos":"รอง ผบ.บน.46(2)","unit":"บน.46","cls":"43","nick":"มี่","tel":"083-845-7395","fav":false,"order":94},{"id":"o95","rank":"น.อ.","name":"ต่อพงศ์ ตระกูลสันติไมตรี","pos":"เสธ.บน.46","unit":"บน.46","cls":"45","nick":"ต่อ","tel":"080-440-1997","fav":false,"order":95},{"id":"o96","rank":"น.ท.","name":"จิตรภณ หลวงประสาร","pos":"ผู้บังคับฝูงบิน 461 บน.46","unit":"บน.46","cls":"48","nick":"โพด","tel":"080-048-5548","fav":false,"order":96},{"id":"o97","rank":"น.ต.","name":"ไกรภูมิ ไทยวิชัย","pos":"หัวหน้าแผนกยุทธการ บก.บน.46","unit":"บน.46","cls":"51","nick":"แซม","tel":"095-541-1645","fav":false,"order":97},{"id":"o98","rank":"น.ต.","name":"จิรภัทร แสงมีอานุภาพ","pos":"นายทหารมาตรฐานการบิน บน.46","unit":"บน.46","cls":"52","nick":"แบงค์/แสง","tel":"","fav":false,"order":98},{"id":"o99","rank":"น.อ.","name":"ณัฏปภัสร์ พุทธินนทนะวงษ์","pos":"ผบ.บน.56","unit":"บน.56","cls":"35","nick":"","tel":"","fav":false,"order":99},{"id":"o100","rank":"น.อ.","name":"นครินทร์ พัชรตระกูลพงศ์","pos":"รอง ผบ.บน.56(1)","unit":"บน.56","cls":"43","nick":"","tel":"","fav":false,"order":100},{"id":"o101","rank":"","name":"","pos":"รอง ผบ.บน.56(2)","unit":"บน.56","cls":"","nick":"","tel":"","fav":false,"order":101},{"id":"o102","rank":"น.อ.","name":"สุทธิชัย ศรีทองอุทัย","pos":"เสธ.บน.56","unit":"บน.56","cls":"44","nick":"","tel":"","fav":false,"order":102},{"id":"o103","rank":"น.ท.","name":"นราธิป อุ่นตา","pos":"ผู้บังคับฝูงบิน 561 บน.56","unit":"บน.56","cls":"48","nick":"ไข่","tel":"086-354-6543","fav":false,"order":103},{"id":"s104","rank":"น.ต.","name":"ธีรวัฒน์ บาริศรี","nick":"ฉี","tel":"082-664-2998","unit":"2031 (นครราชสีมา)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2031","order":104},{"id":"s105","rank":"ร.อ.","name":"คเณศ มูลสาร","nick":"ตี๋","tel":"094-590-1415","unit":"2031 (นครราชสีมา)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2031","order":105},{"id":"s106","rank":"ร.อ.","name":"ภูมิภักดิ์ พิมพ์หนู","nick":"มาร์ค","tel":"083-060-6688","unit":"2031 (นครราชสีมา)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2031","order":106},{"id":"s107","rank":"น.ต.","name":"เอกลักษณ์ จำปาม่วง","nick":"เดี่ยว","tel":"091-419-0421","unit":"2032 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2032","order":107},{"id":"s108","rank":"น.ต.","name":"ธนวัฒน์ คูณขุนทด","nick":"กบ","tel":"094-528-9654","unit":"2032 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2032","order":108},{"id":"s109","rank":"ร.อ.","name":"ภรภัทร แทนบุญ","nick":"พีท","tel":"099-254-5456","unit":"2032 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2032","order":109},{"id":"s110","rank":"น.ต.","name":"ธรณินทร์ พุ่มเกิด","nick":"ต้นกล้า","tel":"083-173-5555","unit":"2033 (เชียงใหม่)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2033","order":110},{"id":"s111","rank":"ร.อ.","name":"ทินวุฒิ วงษ์พร","nick":"โดนัท","tel":"088-789-2537","unit":"2033 (เชียงใหม่)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2033","order":111},{"id":"s112","rank":"ร.อ.","name":"สิปปนนท์ จัลวรรณา","nick":"นน","tel":"089-895-9189","unit":"2033 (เชียงใหม่)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2033","order":112},{"id":"s113","rank":"น.ท.","name":"ณัฐวัฒน์ บุญสนิธิ","nick":"เต้ย","tel":"087-115-9076","unit":"2034 (ดอนเมือง)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2034","order":113},{"id":"s114","rank":"น.ต.","name":"ฉัตรชัย มีชูเสพ","nick":"ฉัตร","tel":"093-286-5946","unit":"2034 (ดอนเมือง)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2034","order":114},{"id":"s115","rank":"ร.อ.","name":"สิทธิชัย สมคำ","nick":"เก้น","tel":"062-324-5339","unit":"2034 (ดอนเมือง)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2034","order":115},{"id":"s116","rank":"น.ท.","name":"ฐปกรณ์ เสือทรงศีล","nick":"เสือ","tel":"084-822-2698","unit":"2035 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2035","order":116},{"id":"s117","rank":"น.ต.","name":"พิชญ์ คุ้มล้วนล้อม","nick":"เต็ม","tel":"099-453-5535","unit":"2035 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2035","order":117},{"id":"s118","rank":"ร.อ.","name":"ณรงค์เดช ธรรมาธิวัฒน์","nick":"มิก","tel":"094-770-6990","unit":"2035 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2035","order":118},{"id":"s119","rank":"ร.อ.","name":"อภินันท์ ศิริคง","nick":"ครอสติส","tel":"089-755-4418","unit":"2035 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2035","order":119},{"id":"s120","rank":"ร.ท.","name":"ชัยธวัช เยียวยา","nick":"เอฟ","tel":"065-727-6165","unit":"2035 (ลพบุรี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2035","order":120},{"id":"s121","rank":"น.ต.","name":"กนกเกียรติ กากแก้ว","nick":"ไผ่","tel":"081-516-5158","unit":"2037 (สุราษฎร์ธานี)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2037","order":121},{"id":"s122","rank":"น.ต.","name":"พุฒิพงษ์ วงศ์ปิยะบวร","nick":"เฟิร์ม","tel":"061-324-1963","unit":"2037 (สุราษฎร์ธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2037","order":122},{"id":"s123","rank":"ร.อ.","name":"วัยวัฒน์ ลาภเพิ่มพูลยิ่ง","nick":"ไอ่พ่น","tel":"096-623-7357","unit":"2037 (สุราษฎร์ธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2037","order":123},{"id":"s124","rank":"น.ต.","name":"ภานุวัฒน์ ศิริกิจ","nick":"นุ","tel":"095-861-3534","unit":"2038 (อุดรธานี)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2038","order":124},{"id":"s125","rank":"ร.อ.","name":"ศิธา แดงมีแสง","nick":"เบส","tel":"086-366-1477","unit":"2038 (อุดรธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2038","order":125},{"id":"s126","rank":"ร.อ.","name":"ศิริพงษ์ บุรีเพีย","nick":"ถั่ว","tel":"096-646-3989","unit":"2038 (อุดรธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2038","order":126},{"id":"s127","rank":"น.ต.","name":"ศฏิล ฟักเฟื่องบุญ","nick":"แชด","tel":"090-420-7884","unit":"9203 (กกล.ทอ.ฉก.9)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 9203","order":127},{"id":"s128","rank":"น.ต.","name":"กรกช รักธรรม","nick":"กอล์ฟ","tel":"099-789-2536","unit":"9203 (กกล.ทอ.ฉก.9)","cls":"","fav":false,"grp":"sep","pos":"รอง ผบ.หน่วยบิน 9203","order":128},{"id":"s129","rank":"ร.อ.","name":"ธีรพงษ์ จามลิกุล","nick":"แบงค์","tel":"094-549-6513","unit":"9203 (กกล.ทอ.ฉก.9)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 9203","order":129},{"id":"s130","rank":"ร.อ.","name":"ณัฐนนท์ ชมภูพล","nick":"เมฆ","tel":"090-069-3299","unit":"9203 (กกล.ทอ.ฉก.9)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 9203","order":130},{"id":"s131","rank":"ร.อ.","name":"วิษณุ รอดสนใจ","nick":"ณุ","tel":"093-740-4282","unit":"2021 (อุบลราชธานี)","cls":"","fav":false,"grp":"sep","pos":"ผบ.หน่วยบิน 2021","order":131},{"id":"s132","rank":"ร.อ.","name":"แทนพงศ์ ห่อทอง","nick":"แทน","tel":"082-519-9742","unit":"2021 (อุบลราชธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2021","order":132},{"id":"s133","rank":"ร.อ.","name":"วุฒิชัย ขันถม","nick":"ก็อต","tel":"099-217-6186","unit":"2021 (อุบลราชธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2021","order":133},{"id":"s134","rank":"ร.อ.","name":"ธิติวุฒิ คชฤทธิ์","nick":"เฟอร์บี้","tel":"083-519-1454","unit":"2021 (อุบลราชธานี)","cls":"","fav":false,"grp":"sep","pos":"นบ.หน่วยบิน 2021","order":134}];
+const KEY = 'phonebook_v1', PREF = 'phonebook_pref_v1';
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+let store = (() => { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } })();
+let contacts = Array.isArray(store) ? store : JSON.parse(JSON.stringify(ORIGINAL));
+if (!contacts.some(c => c.grp === 'sep')) contacts = contacts.concat(ORIGINAL.filter(c => c.grp === 'sep').map(c => ({ ...c })));
+let pref = (() => { try { return JSON.parse(localStorage.getItem(PREF)) || {}; } catch { return {}; } })();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(contacts)); } catch { toast('บันทึกไม่ได้ (พื้นที่เก็บข้อมูลเต็ม/ถูกปิด)'); } };
+const savePref = () => { try { localStorage.setItem(PREF, JSON.stringify(pref)); } catch {} };
+
+let tab = 'all', unit = 'ทั้งหมด', query = '', sort = pref.sort || 'rank';
+if (pref.theme) document.documentElement.dataset.theme = pref.theme;
+
+/* ---------- helpers ---------- */
+const RANKS = ['พล.อ.อ.', 'พล.อ.ท.', 'พล.อ.ต.', 'น.อ.(พ)', 'น.อ.', 'น.ท.', 'น.ต.', 'ร.อ.', 'ร.ท.', 'ร.ต.'];
+const rankIdx = r => { const i = RANKS.indexOf(r); return i < 0 ? 99 : i; };
+const unitNum = u => parseInt((u.match(/\d+/) || [9999])[0], 10);
+const COLORS = ['#1d6fe0', '#0f8f6b', '#c2410c', '#7c3aed', '#be185d', '#0e7490', '#a16207', '#4d7c0f', '#b91c1c', '#475569'];
+const colorOf = u => COLORS[unitNum(u) % COLORS.length];
+const digits = t => String(t || '').replace(/[^\d+]/g, '');
+const phones = t => String(t || '').split(/[\/,;]| หรือ /).map(s => s.trim()).filter(s => digits(s).length >= 6);
+const norm = s => String(s || '').toLowerCase().replace(/[\s\-.()]/g, '');
+const fullName = c => c.name || '(ว่าง)';
+const initials = c => c.name ? (c.nick ? c.nick.split(/[\/ ]/)[0] : c.name.split(' ')[0]).slice(0, 2) : '—';
+const isSep = c => c.grp === 'sep';
+const inTab = c => tab === 'sep' ? isSep(c) : tab === 'std' ? isStd(c) && !isSep(c) : tab === 'all' ? !isSep(c) : true;
+const units = (all) => [...new Set(contacts.filter(c => all || inTab(c)).map(c => c.unit).filter(Boolean))].sort((a, b) => unitNum(a) - unitNum(b) || a.localeCompare(b, 'th'));
+const isStd = c => (c.pos || '').includes('นายทหารมาตรฐานการบิน');
+const uid = () => 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2200); }
+function hl(text, q) {
+  const s = esc(text); if (!q) return s;
+  try { return s.replace(new RegExp('(' + esc(q).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); } catch { return s; }
+}
+function matches(c, q) {
+  if (!q) return true;
+  const hay = norm([c.rank, c.name, c.pos, c.unit, c.nick, c.tel, 'ตท' + c.cls, c.cls].join(' '));
+  return q.split(/\s+/).filter(Boolean).every(w => hay.includes(norm(w)));
+}
+
+/* ---------- main list ---------- */
+function renderChips() {
+  const list = ['ทั้งหมด', ...units()];
+  $('#chips').innerHTML = list.map(u => `<button class="chip ${u === unit ? 'on' : ''}" data-u="${esc(u)}">${esc(u)}</button>`).join('');
+  const box = $('#chips'), on = box.querySelector('.on'); if (on) box.scrollLeft = on.offsetLeft - (box.clientWidth - on.offsetWidth) / 2 - box.offsetLeft;
+}
+function itemHTML(c, q, showUnit) {
+  const ps = phones(c.tel)[0];
+  return `<div class="item ${c.name ? '' : 'vac'}" data-id="${c.id}">
+    <div class="av" style="background:${colorOf(c.unit)}">${esc(initials(c))}</div>
+    <div class="info">
+      <div class="nm">${c.fav ? '<span class="star">★</span> ' : ''}${hl((c.rank ? c.rank + ' ' : '') + fullName(c), q)}${c.nick ? ` <em>(${hl(c.nick, q)})</em>` : ''}</div>
+      <div class="ps">${hl(c.pos, q)}${c.cls ? ' · ตท.' + hl(c.cls, q) : ''}</div>
+      <div class="tl">${ps ? hl(c.tel, q) : '<span style="color:var(--muted)">ยังไม่มีเบอร์</span>'}</div>
+    </div>
+    <a class="callbtn ${ps ? '' : 'off'}" ${ps ? `href="tel:${digits(ps)}"` : ''} data-call title="โทร">📞</a>
+  </div>`;
+}
+function sorter(a, b) {
+  if (sort === 'name') return (a.name || '￿').localeCompare(b.name || '￿', 'th');
+  if (sort === 'cls') return (parseInt(a.cls) || 999) - (parseInt(b.cls) || 999) || rankIdx(a.rank) - rankIdx(b.rank);
+  return 0; // rank = ลำดับเดิมในไฟล์ (ตามตำแหน่ง)
+}
+function renderList() {
+  const q = query.trim();
+  let list = contacts.filter(c => (tab === 'fav' ? c.fav : (tab === 'all' && q ? true : inTab(c))) && (unit === 'ทั้งหมด' || c.unit === unit) && matches(c, q));
+  const total = list.length;
+  if (q) list = list.filter(c => c.name || c.tel);   // ตอนค้นหาซ่อนตำแหน่งว่าง
+  let html = `<div class="bar"><span>${total} รายการ${tab === 'fav' ? ' (โปรด)' : tab === 'std' ? ' · นายทหารมาตรฐานการบิน' : tab === 'sep' ? ' · นบ.ฮ.หน่วยแยก (ปี 70)' : ''}</span>
+    <select id="sortSel"><option value="rank" ${sort === 'rank' ? 'selected' : ''}>เรียงตามตำแหน่ง</option><option value="name" ${sort === 'name' ? 'selected' : ''}>เรียงตามชื่อ ก-ฮ</option><option value="cls" ${sort === 'cls' ? 'selected' : ''}>เรียงตามรุ่น ตท.</option></select></div>`;
+  if (!list.length) {
+    html += `<div class="empty">${emptyMsg() || (tab === 'fav' ? '⭐ ยังไม่มีรายการโปรด<br>กดดาวในหน้ารายละเอียดเพื่อเพิ่ม' : tab === 'std' ? '🛩️ ไม่พบนายทหารมาตรฐานการบิน' : tab === 'sep' ? '🚁 ไม่พบรายชื่อ' : '🔎 ไม่พบรายชื่อที่ค้นหา')}</div>`;
+  } else if (sort === 'rank' && unit === 'ทั้งหมด' && !q) {
+    const groups = new Map();
+    list.forEach(c => { const k = c.unit || 'อื่น ๆ'; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); });
+    [...groups.keys()].sort((a, b) => unitNum(a) - unitNum(b)).forEach(k => {
+      const g = groups.get(k);
+      html += `<div class="gh">${esc(k)}<span>${g.length} ${tab === 'sep' ? 'นาย' : 'ตำแหน่ง'}</span></div>` + g.map(c => itemHTML(c, q)).join('');
+    });
+  } else {
+    html += [...list].sort(sorter).map(c => itemHTML(c, q)).join('');
+  }
+  $('#view').innerHTML = html;
+  $('#sub').textContent = `${contacts.length} รายชื่อ · ${units().length} หน่วย${cloudState ? ' · ' + cloudState : ''}`;
+  $('#sortSel') && ($('#sortSel').onchange = e => { sort = e.target.value; pref.sort = sort; savePref(); renderList(); });
+  fixHeader();
+}
+function fixHeader() { document.documentElement.style.setProperty('--hh', $('#hd').offsetHeight + 'px'); }
+
+/* ---------- detail sheet ---------- */
+function openSheet(html) { $('#sheet').innerHTML = html; $('#sheetBg').classList.add('show'); $('#sheet').scrollTop = 0; }
+function closeSheet() { $('#sheetBg').classList.remove('show'); }
+function showDetail(id) {
+  const c = contacts.find(x => x.id === id); if (!c) return;
+  const ps = phones(c.tel), p1 = ps[0] ? digits(ps[0]) : '';
+  const rows = [['ตำแหน่ง', c.pos], ['สังกัด', c.unit], ['รุ่น ตท.', c.cls], ['ชื่อเล่น', c.nick]].filter(r => r[1])
+    .map(r => `<div><span>${r[0]}</span><strong>${esc(r[1])}</strong></div>`).join('');
+  const tels = ps.length ? ps.map(p => `<a href="tel:${digits(p)}">${esc(p)}</a>`).join('<br>') : '<span style="color:var(--muted)">ยังไม่มีเบอร์</span>';
+  openSheet(`
+    <div class="head"><div class="av" style="background:${colorOf(c.unit)}">${esc(initials(c))}</div>
+      <div style="flex:1;min-width:0"><h2>${esc((c.rank ? c.rank + ' ' : '') + fullName(c))}</h2><div class="sub">${esc(c.pos)}</div></div>
+      <button class="iconbtn" style="background:var(--chip);color:${c.fav ? 'var(--star)' : 'var(--muted)'}" data-act="fav" data-id="${c.id}">${c.fav ? '★' : '☆'}</button></div>
+    <div class="acts">
+      <a class="main ${p1 ? '' : 'dis'}" href="tel:${p1}"><b>📞</b>โทร</a>
+      <a class="${p1 ? '' : 'dis'}" href="sms:${p1}"><b>💬</b>SMS</a>
+      <a class="${p1 ? '' : 'dis'}" href="https://line.me/R/ti/p/%2B66${p1.replace(/^0/, '')}" target="_blank" rel="noopener"><b>🟢</b>LINE</a>
+      <button class="${p1 ? '' : 'dis'}" data-act="copy" data-id="${c.id}"><b>📋</b>คัดลอก</button>
+    </div>
+    <div class="rows"><div class="tel"><span>เบอร์โทร</span><strong>${tels}</strong></div>${rows}</div>
+    <div class="btnrow">
+      <button class="btn" data-act="share" data-id="${c.id}">📤 แชร์</button>
+      <button class="btn" data-act="vcard" data-id="${c.id}">💾 บันทึกเข้าเครื่อง</button>
+    </div>
+    <div class="btnrow">
+      <button class="btn pri" data-act="edit" data-id="${c.id}">${isAdmin ? '✏️ แก้ไข' : '🔒 แก้ไข (Admin)'}</button>
+      <button class="btn" data-act="close">ปิด</button>
+    </div>`);
+}
+
+/* ---------- add / edit ---------- */
+function showForm(id) {
+  const c = id ? contacts.find(x => x.id === id) : { rank: '', name: '', pos: '', unit: unit !== 'ทั้งหมด' ? unit : '', cls: '', nick: '', tel: '' };
+  const ranks = ['', ...RANKS];
+  openSheet(`<h2 style="margin:0 0 6px">${id ? 'แก้ไขรายชื่อ' : 'เพิ่มรายชื่อ'}</h2>
+  <form id="f" autocomplete="off">
+    <div class="two">
+      <div><label>ยศ</label><input name="rank" list="rk" value="${esc(c.rank)}"><datalist id="rk">${ranks.map(r => `<option value="${esc(r)}">`).join('')}</datalist></div>
+      <div><label>รุ่น ตท.</label><input name="cls" inputmode="numeric" value="${esc(c.cls)}"></div>
+    </div>
+    <label>ชื่อ-นามสกุล</label><input name="name" value="${esc(c.name)}">
+    <label>ชื่อเล่น</label><input name="nick" value="${esc(c.nick)}">
+    <label>ตำแหน่ง</label><input name="pos" value="${esc(c.pos)}">
+    <label>สังกัด (เช่น บน.1)</label><input name="unit" list="ul" value="${esc(c.unit)}"><datalist id="ul">${units(true).map(u => `<option value="${esc(u)}">`).join('')}</datalist>
+    <label>เบอร์โทร (หลายเบอร์คั่นด้วย /)</label><input name="tel" type="tel" value="${esc(c.tel)}">
+    <div class="btnrow">
+      ${id ? `<button type="button" class="btn dan" data-act="del" data-id="${id}">🗑 ลบ</button>` : ''}
+      <button type="button" class="btn" data-act="close">ยกเลิก</button>
+      <button type="submit" class="btn pri">บันทึก</button>
+    </div>
+  </form>`);
+  $('#f').onsubmit = e => {
+    e.preventDefault();
+    if (!isAdmin) return toast('ต้องเป็น Admin เท่านั้น');
+    const d = Object.fromEntries(new FormData(e.target).entries());
+    Object.keys(d).forEach(k => d[k] = d[k].replace(/\s+/g, ' ').trim());
+    if (!d.name && !d.pos && !d.tel) return toast('กรุณากรอกอย่างน้อยชื่อ ตำแหน่ง หรือเบอร์');
+    let rec = c;
+    if (id) Object.assign(c, d); else { rec = { id: uid(), fav: false, order: nextOrder(), ...(tab === 'sep' ? { grp: 'sep' } : {}), ...d }; contacts.push(rec); }
+    if (CLOUD) cloudSet(rec); else save();
+    closeSheet(); renderChips(); render(); toast('บันทึกแล้ว');
+  };
+}
+
+/* ---------- vCard / export ---------- */
+function vcf(c) {
+  const parts = (c.name || '').split(' '), last = parts.slice(1).join(' '), f = [parts[0]];
+  const lines = ['BEGIN:VCARD', 'VERSION:3.0', `N:${last};${f[0] || ''};;${c.rank || ''};`, `FN:${(c.rank ? c.rank + ' ' : '') + (c.name || c.pos)}`];
+  if (c.nick) lines.push(`NICKNAME:${c.nick}`);
+  lines.push(`ORG:${c.unit || ''}`, `TITLE:${c.pos || ''}`);
+  phones(c.tel).forEach(p => lines.push(`TEL;TYPE=CELL:${digits(p)}`));
+  if (c.cls) lines.push(`NOTE:ตท.${c.cls}`);
+  lines.push('END:VCARD');
+  return lines.join('\r\n');
+}
+function download(name, text, type) {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = Object.assign(document.createElement('a'), { href: url, download: name });
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+const csvCell = v => /[",\n]/.test(v) ? '"' + String(v).replace(/"/g, '""') + '"' : String(v ?? '');
+function toCSV() {
+  const rows = [['ยศ', 'ชื่อ-นามสกุล', 'ตำแหน่ง', 'สังกัด', 'รุ่น ตท.', 'ชื่อเล่น', 'เบอร์โทร', 'กลุ่ม']]
+    .concat(contacts.map(c => [c.rank, c.name, c.pos, c.unit, c.cls, c.nick, c.tel, isSep(c) ? 'หน่วยแยก' : '']));
+  return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n');
+}
+function parseCSV(t) {
+  const rows = []; let r = [], f = '', q = false; t = t.replace(/^﻿/, '');
+  for (let i = 0; i < t.length; i++) {
+    const ch = t[i];
+    if (q) { if (ch === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ',') { r.push(f); f = ''; }
+    else if (ch === '\n') { r.push(f); rows.push(r); r = []; f = ''; }
+    else if (ch !== '\r') f += ch;
+  }
+  if (f || r.length) { r.push(f); rows.push(r); }
+  return rows;
+}
+function importFile(file) {
+  const rd = new FileReader();
+  rd.onload = () => {
+    try {
+      let list;
+      if (/\.json$/i.test(file.name)) {
+        const j = JSON.parse(rd.result); list = Array.isArray(j) ? j : j.contacts;
+        if (!Array.isArray(list)) throw 0;
+      } else {
+        const cl = s => (s || '').replace(/\s+/g, ' ').trim();
+        list = parseCSV(rd.result).slice(1).filter(r => r.length > 1 && r.some(x => x.trim()))
+          .map(r => ({ rank: cl(r[0]), name: cl(r[1]), pos: cl(r[2]), unit: cl(r[3]), cls: cl(r[4]) === '-' ? '' : cl(r[4]), nick: cl(r[5]), tel: cl(r[6]), ...(cl(r[7]) === 'หน่วยแยก' ? { grp: 'sep' } : {}) }));
+      }
+      if (!list.length) throw 0;
+      if (!confirm(`พบ ${list.length} รายการ\n\nกด "ตกลง" = แทนที่ข้อมูลเดิมทั้งหมด\nกด "ยกเลิก" = ไม่นำเข้า`)) return;
+      contacts = list.map((c, i) => ({ fav: false, ...c, order: Number.isFinite(c.order) ? c.order : i, id: CLOUD && c.id ? String(c.id) : uid() }));
+      if (CLOUD) cloudReplaceAll(contacts).then(() => toast('อัปโหลดขึ้น Cloud แล้ว')).catch(cloudErr); else save();
+      unit = 'ทั้งหมด'; renderChips(); render(); toast(`นำเข้า ${list.length} รายการแล้ว`);
+    } catch { toast('ไฟล์ไม่ถูกต้อง'); }
+  };
+  rd.readAsText(file, 'utf-8');
+}
+
+/* ---------- admin / cloud ---------- */
+// CLOUD = true  -> ใช้ Firebase (Auth + Firestore) ; false -> ทำงานในเครื่องอย่างเดียว (ล็อก Admin ด้วยรหัส PIN)
+const FB_CONFIG = {
+  apiKey: 'AIzaSyB48u-DqruBBiCOTSm-3lkVVG95JJnDlFQ',
+  authDomain: 'telbook-89eee.firebaseapp.com',
+  projectId: 'telbook-89eee',
+  storageBucket: 'telbook-89eee.firebasestorage.app',
+  messagingSenderId: '6898292760',
+  appId: '1:6898292760:web:6f2de1ce076fa598140b6d'
+};
+const FB_VER = '10.14.1';
+const ADMIN_EMAIL = 'admin@70telbook.app', MEMBER_EMAIL = 'member@70telbook.app', PW_PREFIX = 'tb@';
+// โหมดในเครื่อง: ล็อกฝั่งเบราว์เซอร์ ป้องกันการแก้ไขโดยไม่ตั้งใจ ไม่ใช่ระบบความปลอดภัยเต็มรูปแบบ
+const ADMIN_HASH = 3729547083416420;
+const hashPin = (str, seed = 0) => {
+  let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+  for (let i = 0, ch; i < str.length; i++) { ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+};
+let isAdmin = false, fails = 0, lockUntil = 0, afterLogin = null;
+if (!CLOUD) { try { isAdmin = sessionStorage.getItem('pb_admin') === '1'; } catch {} }
+let fb = null, cloudUser = null, cloudState = '', unsubC = null, unsubA = null;
+
+/* --- รายการโปรด (เก็บในเครื่องของแต่ละคน ในโหมด Cloud) --- */
+const FAVKEY = 'phonebook_favs_v1';
+const loadFavs = () => { try { return new Set(JSON.parse(localStorage.getItem(FAVKEY)) || []); } catch { return new Set(); } };
+const saveFavs = () => { try { localStorage.setItem(FAVKEY, JSON.stringify(contacts.filter(c => c.fav).map(c => c.id))); } catch {} };
+
+/* --- Firestore --- */
+const cleanDoc = c => {
+  const o = { rank: c.rank || '', name: c.name || '', pos: c.pos || '', unit: c.unit || '', cls: c.cls || '', nick: c.nick || '', tel: c.tel || '', order: Number.isFinite(c.order) ? c.order : 0 };
+  if (c.grp) o.grp = c.grp;
+  return o;
+};
+const nextOrder = () => contacts.reduce((m, c) => Math.max(m, Number.isFinite(c.order) ? c.order : 0), 0) + 1;
+const cloudErr = e => toast(e && e.code === 'permission-denied' ? 'ไม่มีสิทธิ์บันทึก (ต้องเป็น Admin)' : 'บันทึกไม่สำเร็จ ตรวจสอบอินเทอร์เน็ต');
+async function cloudSet(c) { try { await fb.F.setDoc(fb.F.doc(fb.db, 'contacts', c.id), cleanDoc(c)); } catch (e) { cloudErr(e); } }
+async function cloudDelete(id) { try { await fb.F.deleteDoc(fb.F.doc(fb.db, 'contacts', id)); } catch (e) { cloudErr(e); } }
+async function cloudReplaceAll(list) {
+  const { F, db } = fb;
+  const old = await F.getDocs(F.collection(db, 'contacts'));
+  const ops = [...old.docs.map(d => ({ del: d.ref })), ...list.map(c => ({ ref: F.doc(db, 'contacts', c.id), data: cleanDoc(c) }))];
+  for (let i = 0; i < ops.length; i += 400) {
+    const b = F.writeBatch(db);
+    ops.slice(i, i + 400).forEach(o => o.del ? b.delete(o.del) : b.set(o.ref, o.data));
+    await b.commit();
+  }
+}
+
+async function initCloud() {
+  cloudState = '⏳'; $('#sub').textContent = 'กำลังเชื่อมต่อ…';
+  try {
+    const B = 'https://www.gstatic.com/firebasejs/' + FB_VER + '/';
+    const [A, Au, F] = await Promise.all([import(B + 'firebase-app.js'), import(B + 'firebase-auth.js'), import(B + 'firebase-firestore.js')]);
+    const app = A.initializeApp(FB_CONFIG);
+    let db;
+    try { db = F.initializeFirestore(app, { localCache: F.persistentLocalCache({ tabManager: F.persistentMultipleTabManager() }) }); }
+    catch { db = F.getFirestore(app); }
+    fb = { A, Au, F, db, auth: Au.getAuth(app) };
+    Au.onAuthStateChanged(fb.auth, onAuth);
+  } catch (e) {
+    cloudState = '⚠️'; render(); toast('เชื่อมต่อ Cloud ไม่ได้ (ต้องใช้อินเทอร์เน็ตเปิดครั้งแรก)');
+  }
+}
+function onAuth(user) {
+  const { F, db } = fb;
+  cloudUser = user; unsubC && unsubC(); unsubA && unsubA(); unsubC = unsubA = null;
+  isAdmin = false; contacts = []; cloudState = user ? '⏳' : '🔒';
+  updateAdminUI(); renderChips(); render();
+  if (!user) { showGate(); return; }
+  hideGate();
+  isAdmin = user.email === ADMIN_EMAIL; updateAdminUI(); render();
+  if (isAdmin && afterLogin) { const f = afterLogin; afterLogin = null; setTimeout(f, 150); }
+  unsubC = F.onSnapshot(F.query(F.collection(db, 'contacts'), F.orderBy('order')), snap => {
+    const favs = loadFavs();
+    contacts = snap.docs.map(d => ({ ...d.data(), id: d.id, fav: favs.has(d.id) }));
+    cloudState = snap.metadata.fromCache ? '📴' : '☁️';
+    renderChips(); render();
+  }, e => { cloudState = '⚠️'; render(); toast(e && e.code === 'permission-denied' ? 'บัญชีนี้ไม่มีสิทธิ์อ่านข้อมูล โปรดแจ้ง Admin' : 'โหลดข้อมูลไม่สำเร็จ'); });
+}
+function emptyMsg() {
+  if (!CLOUD || contacts.length) return '';
+  if (!cloudUser) return '🔒 กรุณาเข้าสู่ระบบเพื่อดูสมุดโทรศัพท์<br><br><button class="btn pri" data-act="login" style="max-width:220px">เข้าสู่ระบบ</button>';
+  return isAdmin ? '📭 ยังไม่มีข้อมูลบน Cloud<br>ไปที่ ตั้งค่า → นำเข้า เพื่ออัปโหลดข้อมูลตั้งต้น' : (cloudState === '⏳' ? '⏳ กำลังโหลดข้อมูล…' : '📭 ยังไม่มีข้อมูล');
+}
+function accountBox() {
+  const who = CLOUD ? cloudUser : (unlocked || isAdmin);
+  return `<h3>บัญชี</h3><div class="box">
+    <div style="padding:14px 16px;font-size:15px">${who ? `👤 ${isAdmin ? 'Admin' : 'ผู้ใช้'}<br><small style="color:var(--muted)">${isAdmin ? 'สิทธิ์: Admin (แก้ไขข้อมูลได้)' : 'สิทธิ์: ผู้ใช้ทั่วไป (ดูอย่างเดียว)'}</small>` : '🔒 ยังไม่ได้เข้าสู่ระบบ'}</div>
+    <button data-act="${who ? 'logout' : 'login'}">${who ? '🚪 ออกจากระบบ' : '🔑 เข้าสู่ระบบ'} <small>›</small></button></div>`;
+}
+
+/* --- UI สิทธิ์ --- */
+function updateAdminUI() {
+  const b = $('#adminBtn');
+  b.textContent = isAdmin ? '🔓' : (CLOUD && cloudUser ? '👤' : '🔒');
+  b.title = isAdmin ? 'Admin (แตะเพื่อออกจากระบบ)' : (CLOUD && cloudUser ? 'ออกจากระบบ' : 'เข้าสู่ระบบ');
+  $('#fab').classList.toggle('hide', !isAdmin || tab === 'set');
+}
+function needAdmin(fn) {
+  if (isAdmin) fn();
+  else showLogin(fn);
+}
+function showLogin(fn) {
+  afterLogin = fn || null;
+  if (CLOUD) return (!cloudUser && !fn) ? showGate() : showCloudLogin();
+  openSheet(`<h2 style="margin:0 0 4px">🔒 เข้าสู่ระบบ Admin</h2>
+    <div class="sub">เฉพาะ Admin เท่านั้นที่เพิ่ม/แก้ไข/ลบข้อมูลได้ ผู้ใช้ทั่วไปดู ค้นหา โทร และแชร์ได้ตามปกติ</div>
+    <form id="lf" autocomplete="off"><label>รหัส Admin</label>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="กรอกรหัส" style="font-size:20px;letter-spacing:6px;text-align:center">
+      <div id="lerr" style="color:var(--danger);font-size:14px;min-height:20px;margin-top:6px"></div>
+      <div class="btnrow"><button type="button" class="btn" data-act="close">ยกเลิก</button><button type="submit" class="btn pri">เข้าสู่ระบบ</button></div></form>`);
+  setTimeout(() => $('#pin') && $('#pin').focus(), 50);
+  $('#lf').onsubmit = e => {
+    e.preventDefault();
+    const wait = Math.ceil((lockUntil - Date.now()) / 1000);
+    if (wait > 0) { $('#lerr').textContent = 'ใส่รหัสผิดหลายครั้ง กรุณารอ ' + wait + ' วินาที'; return; }
+    if (hashPin('phonebook-admin|' + $('#pin').value.trim()) === ADMIN_HASH) {
+      isAdmin = true; fails = 0; try { sessionStorage.setItem('pb_admin', '1'); } catch {}
+      closeSheet(); updateAdminUI(); render(); toast('เข้าสู่ระบบ Admin แล้ว');
+      const f = afterLogin; afterLogin = null; if (f) setTimeout(f, 150);
+    } else {
+      fails++; $('#pin').value = '';
+      if (fails >= 5) { lockUntil = Date.now() + 30000; fails = 0; $('#lerr').textContent = 'ใส่รหัสผิด 5 ครั้ง ล็อก 30 วินาที'; }
+      else $('#lerr').textContent = 'รหัสไม่ถูกต้อง';
+    }
+  };
+}
+function showCloudLogin() {
+  const needAdminMsg = afterLogin ? 'ใส่รหัส Admin เพื่อแก้ไขข้อมูล' : 'ใส่รหัสเข้าใช้งาน (รหัสผู้ใช้ หรือ รหัส Admin)';
+  openSheet(`<h2 style="margin:0 0 4px">🔒 เข้าสู่ระบบ</h2>
+    <div class="sub">${needAdminMsg}</div>
+    <form id="lf" autocomplete="off"><label>รหัส</label>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="กรอกรหัส" style="font-size:20px;letter-spacing:6px;text-align:center">
+      <div id="lerr" style="color:var(--danger);font-size:14px;min-height:20px;margin-top:6px"></div>
+      <div class="btnrow"><button type="button" class="btn" data-act="close">ยกเลิก</button><button type="submit" class="btn pri" id="lbtn">เข้าสู่ระบบ</button></div></form>`);
+  setTimeout(() => $('#pin') && $('#pin').focus(), 50);
+  $('#lf').onsubmit = async e => {
+    e.preventDefault();
+    const code = $('#pin').value.trim();
+    if (!code) return;
+    if (!fb) { $('#lerr').textContent = 'ยังเชื่อมต่อ Cloud ไม่ได้ ลองใหม่อีกครั้ง'; return; }
+    $('#lbtn').disabled = true; $('#lerr').textContent = '';
+    const { Au, auth } = fb, pw = PW_PREFIX + code;
+    try {
+      let ok = false, lastErr = null;
+      // ถ้าเข้าสู่ระบบเป็นผู้ใช้แล้วและกำลังขอสิทธิ์ Admin ให้ลอง Admin อย่างเดียว
+      for (const em of (afterLogin ? [ADMIN_EMAIL] : [ADMIN_EMAIL, MEMBER_EMAIL])) {
+        try { await Au.signInWithEmailAndPassword(auth, em, pw); ok = true; break; } catch (err) { lastErr = err; if (err.code === 'auth/too-many-requests' || err.code === 'auth/network-request-failed') break; }
+      }
+      if (!ok) throw lastErr;
+      closeSheet(); toast('เข้าสู่ระบบแล้ว');
+    } catch (err) {
+      const m = { 'auth/too-many-requests': 'ใส่รหัสผิดหลายครั้ง กรุณารอสักครู่', 'auth/network-request-failed': 'ไม่มีอินเทอร์เน็ต' };
+      $('#lerr').textContent = m[err && err.code] || 'รหัสไม่ถูกต้อง'; $('#lbtn').disabled = false; $('#pin').value = '';
+    }
+  };
+}
+function adminLogout() {
+  if (CLOUD) {
+    if (cloudUser && confirm('ออกจากระบบ? (ต้องใส่รหัสใหม่เพื่อเข้าใช้งาน)')) fb.Au.signOut(fb.auth).then(() => toast('ออกจากระบบแล้ว'));
+    return;
+  }
+  if (!confirm('ออกจากระบบ Admin?')) return;
+  isAdmin = false; try { sessionStorage.removeItem('pb_admin'); } catch {}
+  updateAdminUI(); render(); toast('ออกจากระบบ Admin แล้ว');
+}
+
+/* ---------- หน้า Login ก่อนเข้าสมุดโทรศัพท์ ---------- */
+// รหัสเข้าใช้งาน (ผู้ใช้): RTAF.70 — โหมดในเครื่องตรวจด้วยแฮช, โหมด Cloud ใช้เป็นรหัสผ่านของบัญชี member
+const MEMBER_HASH = 4168970925607801;
+let unlocked = false;
+if (!CLOUD) { try { unlocked = localStorage.getItem('pb_unlock') === '1' || sessionStorage.getItem('pb_unlock') === '1'; } catch {} }
+function showGate() {
+  const g = $('#gate'); if (!g) return;
+  g.classList.add('show');
+  $('#gerr').textContent = CLOUD && !fb ? 'กำลังเชื่อมต่อ…' : '';
+  setTimeout(() => $('#gcode') && $('#gcode').focus(), 80);
+}
+function hideGate() { const g = $('#gate'); if (g) g.classList.remove('show'); const c = $('#gcode'); if (c) c.value = ''; }
+async function gateSubmit(e) {
+  e.preventDefault();
+  const code = $('#gcode').value.trim().toUpperCase(), err = $('#gerr'), btn = $('#gbtn'), remember = $('#grem').checked;
+  if (!code) return;
+  err.textContent = ''; btn.disabled = true;
+  try {
+    if (CLOUD) {
+      if (!fb) { err.textContent = 'ยังเชื่อมต่อ Cloud ไม่ได้ ลองใหม่อีกครั้ง'; return; }
+      try { await fb.Au.setPersistence(fb.auth, remember ? fb.Au.browserLocalPersistence : fb.Au.browserSessionPersistence); } catch {}
+      let ok = false, last = null;
+      for (const em of [MEMBER_EMAIL, ADMIN_EMAIL]) {
+        try { await fb.Au.signInWithEmailAndPassword(fb.auth, em, PW_PREFIX + code); ok = true; break; }
+        catch (x) { last = x; if (x.code === 'auth/too-many-requests' || x.code === 'auth/network-request-failed') break; }
+      }
+      if (!ok) throw last;   // สำเร็จ: onAuth จะซ่อนหน้า login เอง
+    } else {
+      const wait = Math.ceil((lockUntil - Date.now()) / 1000);
+      if (wait > 0) { err.textContent = 'ใส่รหัสผิดหลายครั้ง กรุณารอ ' + wait + ' วินาที'; return; }
+      const asAdmin = hashPin('phonebook-admin|' + code) === ADMIN_HASH;
+      if (hashPin('phonebook-member|' + code) === MEMBER_HASH || asAdmin) {
+        fails = 0; unlocked = true;
+        try { (remember ? localStorage : sessionStorage).setItem('pb_unlock', '1'); } catch {}
+        if (asAdmin) { isAdmin = true; try { sessionStorage.setItem('pb_admin', '1'); } catch {} }
+        hideGate(); updateAdminUI(); render();
+      } else {
+        fails++; $('#gcode').value = '';
+        if (fails >= 5) { lockUntil = Date.now() + 30000; fails = 0; err.textContent = 'ใส่รหัสผิด 5 ครั้ง ล็อก 30 วินาที'; }
+        else err.textContent = 'รหัสไม่ถูกต้อง';
+      }
+    }
+  } catch (x) {
+    const m = { 'auth/too-many-requests': 'ใส่รหัสผิดหลายครั้ง กรุณารอสักครู่', 'auth/network-request-failed': 'ไม่มีอินเทอร์เน็ต' };
+    err.textContent = m[x && x.code] || 'รหัสไม่ถูกต้อง'; $('#gcode').value = '';
+  } finally { btn.disabled = false; }
+}
+// ออกจากระบบทั้งหมด (กลับไปหน้า login)
+function fullLogout() {
+  if (!confirm('ออกจากระบบ? (ต้องใส่รหัสใหม่เพื่อเข้าใช้งาน)')) return;
+  if (CLOUD) { fb.Au.signOut(fb.auth); return; }
+  unlocked = false; isAdmin = false;
+  try { localStorage.removeItem('pb_unlock'); sessionStorage.removeItem('pb_unlock'); sessionStorage.removeItem('pb_admin'); } catch {}
+  updateAdminUI(); render(); showGate();
+}
+$('#gateForm').onsubmit = gateSubmit;
+$('#geye').onclick = () => { const i = $('#gcode'); i.type = i.type === 'password' ? 'text' : 'password'; };
+
+/* ---------- share ---------- */
+const APP_TITLE = 'สมุดโทรศัพท์ ผบช.กองบิน';
+const today = () => new Date().toISOString().slice(0, 10);
+function shareList(scope, onlyTel) {
+  return contacts.filter(c => (scope === 'sep' ? isSep(c) : scope === 'std' ? isStd(c) && !isSep(c) : true) && (scope !== 'fav' || c.fav) && (c.name || c.tel) && (!onlyTel || phones(c.tel).length));
+}
+function shareText(scope, onlyTel) {
+  const list = shareList(scope, onlyTel), label = { all: 'ทั้งหมด', std: 'นายทหารมาตรฐานการบิน', sep: 'นบ.ฮ.หน่วยแยก', fav: 'รายการโปรด' }[scope];
+  const groups = new Map();
+  list.forEach(c => { const k = c.unit || 'อื่น ๆ'; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(c); });
+  const out = [`📞 ${APP_TITLE} (${label} · ${list.length} รายชื่อ)`];
+  [...groups.keys()].sort((a, b) => unitNum(a) - unitNum(b)).forEach(k => {
+    out.push('', `【${k}】`);
+    groups.get(k).forEach(c => {
+      out.push(`${c.rank ? c.rank + ' ' : ''}${c.name || '(ว่าง)'}${c.nick ? ' (' + c.nick + ')' : ''} · ${c.pos}${c.cls ? ' ตท.' + c.cls : ''}`);
+      out.push(c.tel ? `  ☎ ${c.tel}` : '  ☎ -');
+    });
+  });
+  return out.join('\n');
+}
+// สร้างไฟล์ .html ของแอปนี้ โดยแทนที่ข้อมูลเริ่มต้นด้วยรายชื่อที่เลือก
+function appHtml(data) {
+  const start = SRC_HTML.indexOf('const ORIGINAL = '), end = SRC_HTML.indexOf(';\nconst KEY', start);
+  if (start < 0 || end < 0) return null;
+  const json = JSON.stringify(data).replace(/</g, '\\u003c');
+  return (SRC_HTML.slice(0, start) + 'const ORIGINAL = ' + json + SRC_HTML.slice(end)).replace('const CLOUD = true;', 'const CLOUD = false;');
+}
+async function shareFile(file) {
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], title: APP_TITLE }); return; } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  download(file.name, await file.text(), file.type);
+  toast('เครื่องนี้แชร์ไฟล์ตรงไม่ได้ จึงดาวน์โหลดแทน นำไฟล์ไปส่งใน LINE ได้เลย');
+}
+function showShare() {
+  openSheet(`<h2 style="margin:0 0 4px">📤 แชร์สมุดโทรศัพท์</h2>
+    <div class="sub" style="margin-bottom:8px">เลือกวิธีส่ง แล้วเลือก LINE ในหน้าต่างแชร์ของมือถือ</div>
+    <form onsubmit="return false">
+      <label>ข้อมูลที่จะแชร์</label>
+      <select id="shScope"><option value="all">ทั้งหมด (${contacts.length} รายชื่อ)</option><option value="std" ${tab === 'std' ? 'selected' : ''}>เฉพาะนายทหารมาตรฐานการบิน</option><option value="sep" ${tab === 'sep' ? 'selected' : ''}>เฉพาะ นบ.ฮ.หน่วยแยก</option><option value="fav" ${tab === 'fav' ? 'selected' : ''}>เฉพาะรายการโปรด</option></select>
+      <label style="display:flex;gap:8px;align-items:center;color:var(--text);margin-top:12px"><input id="shTel" type="checkbox" checked style="width:auto"> เฉพาะคนที่มีเบอร์โทร (ข้อความ)</label>
+    </form>
+    <div class="btnrow" style="flex-direction:column">
+      <button class="btn pri" data-act="shFile">📱 แชร์เป็นไฟล์สมุดโทรศัพท์ (เปิดใช้งานได้ทันที)</button>
+      <button class="btn" data-act="shText">💬 แชร์เป็นข้อความ (ชื่อ + เบอร์)</button>
+      <button class="btn" data-act="shCsv">📄 แชร์เป็นไฟล์ CSV</button>
+      <button class="btn" data-act="shCopy">📋 คัดลอกข้อความ</button>
+      <button class="btn" data-act="close">ปิด</button>
+    </div>
+    <div class="sub" style="margin-top:12px;font-size:12px">ไฟล์สมุดโทรศัพท์ = ไฟล์ .html ที่รวมข้อมูลไว้ในตัว ผู้รับกดเปิดในมือถือได้เลย (ไม่ต้องมีเน็ต) ⚠️ มีเบอร์ส่วนตัว โปรดส่งเฉพาะกลุ่มที่เกี่ยวข้อง</div>`);
+}
+async function doShare(act) {
+  const scope = $('#shScope').value, onlyTel = $('#shTel').checked;
+  if (act === 'shFile') {
+    const ids = new Set(shareList(scope, false).map(c => c.id));
+    const h = appHtml(contacts.filter(c => scope === 'all' || ids.has(c.id)));
+    if (!h) return toast('สร้างไฟล์ไม่ได้');
+    return shareFile(new File([h], `phonebook-${today()}.html`, { type: 'text/html' }));
+  }
+  if (act === 'shCsv') {
+    const rows = [['ยศ', 'ชื่อ-นามสกุล', 'ตำแหน่ง', 'สังกัด', 'รุ่น ตท.', 'ชื่อเล่น', 'เบอร์โทร', 'กลุ่ม']]
+      .concat(shareList(scope, false).map(c => [c.rank, c.name, c.pos, c.unit, c.cls, c.nick, c.tel, isSep(c) ? 'หน่วยแยก' : '']));
+    return shareFile(new File(['﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n')], `phonebook-${today()}.csv`, { type: 'text/csv' }));
+  }
+  const text = shareText(scope, onlyTel);
+  if (act === 'shText' && navigator.share) { try { await navigator.share({ title: APP_TITLE, text }); } catch {} return; }
+  try { await navigator.clipboard.writeText(text); toast(act === 'shCopy' ? 'คัดลอกแล้ว นำไปวางใน LINE ได้เลย' : 'เครื่องนี้ไม่มีหน้าต่างแชร์ จึงคัดลอกข้อความให้แล้ว'); } catch { toast('คัดลอกไม่ได้'); }
+}
+
+/* ---------- settings ---------- */
+function renderSettings() {
+  $('#view').innerHTML = `<div class="set">
+    ${accountBox()}
+    <h3>ข้อมูล</h3><div class="box">
+      <button data-act="shareSet">📤 แชร์สมุดโทรศัพท์ทั้งชุด (LINE ฯลฯ) <small>›</small></button>
+      <button data-act="exportCsv">📄 ส่งออกเป็น CSV (เปิดใน Excel ได้) <small>›</small></button>
+      <button data-act="exportJson">💾 สำรองข้อมูล (JSON) <small>›</small></button>
+      <button data-act="exportVcf">📇 ส่งออก vCard ทั้งหมด (ลงในรายชื่อมือถือ) <small>›</small></button>
+      <button data-act="import">📥 ${CLOUD ? 'นำเข้า/อัปโหลดขึ้น Cloud (Admin) — แทนที่ข้อมูลทั้งหมด' : 'นำเข้าจาก CSV / JSON'} <small>›</small></button>
+      ${CLOUD ? '' : '<button data-act="reset" style="color:var(--danger)">♻️ คืนค่าข้อมูลเดิมจากไฟล์ต้นฉบับ <small>›</small></button>'}
+    </div>
+    <h3>การแสดงผล</h3><div class="box">
+      <button data-act="theme">🌓 โหมดสี: <small>${pref.theme === 'dark' ? 'มืด' : pref.theme === 'light' ? 'สว่าง' : 'ตามระบบ'}</small></button>
+    </div>
+    <h3>เกี่ยวกับ</h3><div class="box"><div style="padding:14px 16px;font-size:14px;color:var(--muted);line-height:1.6">
+      สมุดโทรศัพท์ ผบช.กองบิน — ${contacts.length} รายชื่อ<br>
+      ข้อมูลเก็บในเครื่องนี้เท่านั้น ไม่ส่งออกอินเทอร์เน็ต ใช้งานออฟไลน์ได้<br>
+      เพิ่มลงหน้าจอหลัก: เมนูเบราว์เซอร์ → "เพิ่มไปยังหน้าจอหลัก"<br>
+      <b>ข้อมูลนี้เป็นข้อมูลบุคคล โปรดอย่าเผยแพร่ภายนอก</b></div></div>
+  </div>`;
+  $('#sub').textContent = 'ตั้งค่า';
+}
+
+/* ---------- actions ---------- */
+document.addEventListener('click', async e => {
+  const t = e.target;
+  if (t.closest('[data-call]')) { e.stopPropagation(); return; }
+  const item = t.closest('.item'); if (item) return showDetail(item.dataset.id);
+  const chip = t.closest('.chip'); if (chip) { unit = chip.dataset.u; renderChips(); render(); window.scrollTo(0, 0); return; }
+  const nb = t.closest('nav button'); if (nb) { tab = nb.dataset.tab; unit = 'ทั้งหมด'; renderChips(); document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b === nb)); render(); window.scrollTo(0, 0); return; }
+  if (t === $('#sheetBg')) return closeSheet();
+  const a = t.closest('[data-act]'); if (!a) return;
+  const act = a.dataset.act, c = contacts.find(x => x.id === a.dataset.id);
+  switch (act) {
+    case 'close': closeSheet(); break;
+    case 'login': showLogin(); break;
+    case 'logout': fullLogout(); break;
+    case 'shareSet': showShare(); break;
+    case 'shFile': case 'shText': case 'shCsv': case 'shCopy': doShare(act); break;
+    case 'fav': c.fav = !c.fav; if (CLOUD) saveFavs(); else save(); showDetail(c.id); render(); break;
+    case 'edit': needAdmin(() => showForm(c.id)); break;
+    case 'del': if (!isAdmin) return needAdmin(() => {}); if (confirm(`ลบ "${fullName(c)}" ใช่หรือไม่?`)) { contacts = contacts.filter(x => x !== c); if (CLOUD) cloudDelete(c.id); else save(); closeSheet(); renderChips(); render(); toast('ลบแล้ว'); } break;
+    case 'copy': try { await navigator.clipboard.writeText(phones(c.tel)[0]); toast('คัดลอกเบอร์แล้ว'); } catch { toast('คัดลอกไม่ได้'); } break;
+    case 'share': {
+      const text = `${c.rank ? c.rank + ' ' : ''}${c.name}\n${c.pos}\n${c.tel}`;
+      if (navigator.share) navigator.share({ title: c.name, text }).catch(() => {});
+      else try { await navigator.clipboard.writeText(text); toast('คัดลอกข้อมูลแล้ว'); } catch { toast('แชร์ไม่ได้'); }
+      break; }
+    case 'vcard': download(`${c.name || c.pos}.vcf`, vcf(c), 'text/vcard'); break;
+    case 'exportCsv': download('สมุดโทรศัพท์.csv', toCSV(), 'text/csv'); break;
+    case 'exportJson': download('phonebook-backup.json', JSON.stringify(contacts), 'application/json'); break;
+    case 'exportVcf': download('phonebook.vcf', contacts.filter(x => phones(x.tel).length).map(vcf).join('\r\n'), 'text/vcard'); break;
+    case 'import': needAdmin(() => $('#file').click()); break;
+    case 'reset': if (!isAdmin) return needAdmin(() => {}); if (confirm('คืนค่าเป็นข้อมูลต้นฉบับ?\nการแก้ไข/เพิ่ม/ดาวโปรดทั้งหมดจะหายไป')) { contacts = JSON.parse(JSON.stringify(ORIGINAL)); save(); unit = 'ทั้งหมด'; renderChips(); toast('คืนค่าแล้ว'); renderSettings(); } break;
+    case 'theme': pref.theme = pref.theme === 'dark' ? 'light' : pref.theme === 'light' ? '' : 'dark'; savePref(); applyTheme(); renderSettings(); break;
+  }
+});
+function applyTheme() { if (pref.theme) document.documentElement.dataset.theme = pref.theme; else delete document.documentElement.dataset.theme; }
+$('#themeBtn').onclick = () => { const dark = document.documentElement.dataset.theme === 'dark' || (!pref.theme && matchMedia('(prefers-color-scheme:dark)').matches); pref.theme = dark ? 'light' : 'dark'; savePref(); applyTheme(); };
+$('#file').onchange = e => { if (e.target.files[0]) importFile(e.target.files[0]); e.target.value = ''; };
+$('#fab').onclick = () => needAdmin(() => showForm());
+$('#adminBtn').onclick = () => isAdmin ? adminLogout() : showLogin();
+$('#shareBtn').onclick = showShare;
+$('#q').addEventListener('input', e => { query = e.target.value; $('#qx').style.display = query ? 'block' : 'none'; if (tab === 'set') { tab = 'all'; document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === 'all')); } render(); });
+$('#qx').onclick = () => { $('#q').value = ''; query = ''; $('#qx').style.display = 'none'; render(); $('#q').focus(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+addEventListener('resize', fixHeader);
+
+function render() {
+  const set = tab === 'set';
+  $('#chips').classList.toggle('hide', set); $('.search').classList.toggle('hide', set); updateAdminUI();
+  set ? renderSettings() : renderList();
+  fixHeader();
+}
+renderChips(); render(); updateAdminUI();
+if (CLOUD || !(unlocked || isAdmin)) showGate();
+if (CLOUD) initCloud();
+</script>
+</body>
+</html>
