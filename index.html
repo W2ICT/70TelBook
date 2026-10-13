@@ -74,7 +74,7 @@ nav button.on{color:var(--accent);font-weight:700}
 .sheet .av{width:60px;height:60px;font-size:20px}
 .sheet h2{margin:0;font-size:19px}
 .sheet .sub{color:var(--muted);font-size:14px}
-.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
 .acts a,.acts button{border:0;background:var(--chip);border-radius:12px;padding:10px 4px;text-align:center;text-decoration:none;color:var(--text);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:3px}
 .acts b{font-size:20px;font-weight:400}
 .acts .main{background:var(--call);color:#fff}
@@ -267,7 +267,6 @@ function showDetail(id) {
     <div class="acts">
       <a class="main ${p1 ? '' : 'dis'}" href="tel:${p1}"><b>📞</b>โทร</a>
       <a class="${p1 ? '' : 'dis'}" href="sms:${p1}"><b>💬</b>SMS</a>
-      <a class="${p1 ? '' : 'dis'}" href="https://line.me/R/ti/p/%2B66${p1.replace(/^0/, '')}" target="_blank" rel="noopener"><b>🟢</b>LINE</a>
       <button class="${p1 ? '' : 'dis'}" data-act="copy" data-id="${c.id}"><b>📋</b>คัดลอก</button>
     </div>
     <div class="rows"><div class="tel"><span>เบอร์โทร</span><strong>${tels}</strong></div>${rows}</div>
